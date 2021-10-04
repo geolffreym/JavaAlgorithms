@@ -9,7 +9,6 @@ public class QuickUnion {
     }
 
     void fillComponents() {
-        // O(N)
         // Initial fill components with value=index
         for (int i = 0; i < this.components.length; i++)
             this.components[i] = i;
@@ -22,7 +21,6 @@ public class QuickUnion {
      * @return the root for node i
      */
     private int getRoot(int i) {
-        // O(N)
         // Go up through the tree until find the `reflexive node` = root
         while (i != this.components[i]) i = this.components[i];
         return i;
@@ -38,7 +36,6 @@ public class QuickUnion {
      * @return boolean true if connected else false
      */
     boolean isConnected(int p, int q) {
-        // O(N^2)
         return getRoot(p) == getRoot(q);
     }
 
@@ -50,7 +47,6 @@ public class QuickUnion {
      * @param q index
      */
     void addUnion(int p, int q) {
-        // O(N^2)
         // root for index p
         int pRoot = getRoot(p);
         // root for index q

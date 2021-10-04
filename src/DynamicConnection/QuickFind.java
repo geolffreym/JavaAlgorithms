@@ -10,7 +10,6 @@ public class QuickFind {
     }
 
     void fillComponents() {
-        // O(N)
         // Initial fill components with value=index
         for (int i = 0; i < this.components.length; i++)
             this.components[i] = i;
@@ -25,7 +24,6 @@ public class QuickFind {
      * @return boolean true if connected else false
      */
     boolean isConnected(int p, int q) {
-        // O(1)
         return this.components[p] == this.components[q];
     }
 
@@ -37,7 +35,6 @@ public class QuickFind {
      * @param q index
      */
     void addUnion(int p, int q) {
-        // O(N)
         // value for index p
         int idp = this.components[p];
         // value for index q
