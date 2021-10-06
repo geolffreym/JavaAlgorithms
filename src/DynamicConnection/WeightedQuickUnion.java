@@ -14,7 +14,7 @@ public class WeightedQuickUnion {
         // Initial fill components with value=index
         for (int i = 0; i < this.components.length; i++) {
             this.components[i] = i;
-            this.sizes[i] = 0;
+            this.sizes[i] = i;
         }
     }
 
