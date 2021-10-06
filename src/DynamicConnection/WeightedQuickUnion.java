@@ -8,6 +8,7 @@ public class WeightedQuickUnion {
     void constructor(int N) {
         // Initialize with N objects
         this.components = new int[N];
+        this.sizes = new int[N];
     }
 
     void fillComponents() {
