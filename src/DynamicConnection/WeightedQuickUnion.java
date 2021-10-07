@@ -2,21 +2,21 @@ package DynamicConnection;
 
 
 public class WeightedQuickUnion {
-    private int[] components;
-    private int[] sizes;
+    private final int[] tree;
+    private final int[] sizes;
 
-    void constructor(int N) {
+    public WeightedQuickUnion(int N) {
         // Initialize with N objects
-        this.components = new int[N];
-    }
+        this.tree = new int[N];
+        this.sizes = new int[N];
 
-    void fillComponents() {
         // Initial fill components with value=index
-        for (int i = 0; i < this.components.length; i++) {
-            this.components[i] = i;
+        for (int i = 0; i < this.tree.length; i++) {
+            this.tree[i] = i;
             this.sizes[i] = 0;
         }
     }
+
 
     /**
      * Return the root in tree for node i
@@ -26,12 +26,12 @@ public class WeightedQuickUnion {
      * @param i node to search root for
      * @return the root for node i
      */
-    private int getRoot(int i) {
+    private int find(int i) {
         // Go up through the tree until find the `reflexive node` = root
-        while (i != this.components[i]) {
+        while (i != this.tree[i]) {
             // Root for `i` will be one degree below main root now.
-            this.components[i] = this.components[this.components[i]];
-            i = this.components[i];
+            this.tree[i] = this.tree[this.tree[i]];
+            i = this.tree[i];
         }
         return i;
 
@@ -45,8 +45,8 @@ public class WeightedQuickUnion {
      * @param q index
      * @return boolean true if connected else false
      */
-    boolean isConnected(int p, int q) {
-        return getRoot(p) == getRoot(q);
+    public boolean connected(int p, int q) {
+        return find(p) == find(q);
     }
 
     /**
@@ -56,11 +56,11 @@ public class WeightedQuickUnion {
      * @param p index
      * @param q index
      */
-    void addUnion(int p, int q) {
+    public void union(int p, int q) {
         // root for index p
-        int pRoot = getRoot(p);
+        int pRoot = find(p);
         // root for index q
-        int qRoot = getRoot(q);
+        int qRoot = find(q);
         // Same root? Do nothing!
         if (pRoot == qRoot) return;
 
@@ -82,10 +82,10 @@ public class WeightedQuickUnion {
         int qSize = this.sizes[qRoot];
 
         if (pSize < qSize) {
-            this.components[pRoot] = qRoot;
+            this.tree[pRoot] = qRoot;
             this.sizes[qRoot] += pSize;
         } else {
-            this.components[qRoot] = pRoot;
+            this.tree[qRoot] = pRoot;
             this.sizes[pRoot] += qSize;
         }
     }

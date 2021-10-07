@@ -2,18 +2,17 @@ package DynamicConnection;
 
 
 public class QuickFind {
-    private int[] components;
+    private final int[] tree;
 
-    void constructor(int N) {
+    public QuickFind(int N) {
         // Initialize with N objects
-        this.components = new int[N];
+        this.tree = new int[N];
+
+        // Initial fill components with value=index
+        for (int i = 0; i < this.tree.length; i++)
+            this.tree[i] = i;
     }
 
-    void fillComponents() {
-        // Initial fill components with value=index
-        for (int i = 0; i < this.components.length; i++)
-            this.components[i] = i;
-    }
 
     /**
      * Check if index p value is equal to q value
@@ -23,8 +22,8 @@ public class QuickFind {
      * @param q index
      * @return boolean true if connected else false
      */
-    boolean isConnected(int p, int q) {
-        return this.components[p] == this.components[q];
+    public boolean connected(int p, int q) {
+        return this.tree[p] == this.tree[q];
     }
 
     /**
@@ -34,13 +33,13 @@ public class QuickFind {
      * @param p index
      * @param q index
      */
-    void addUnion(int p, int q) {
+    public void union(int p, int q) {
         // value for index p
-        int idp = this.components[p];
+        int idp = this.tree[p];
         // value for index q
-        int idq = this.components[q];
+        int idq = this.tree[q];
 
-        for (int i = 0; i < this.components.length; i++)
-            if (this.components[i] == idp) this.components[i] = idq;
+        for (int i = 0; i < this.tree.length; i++)
+            if (this.tree[i] == idp) this.tree[i] = idq;
     }
 }

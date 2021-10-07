@@ -1,18 +1,17 @@
 package DynamicConnection;
 
 public class QuickUnion {
-    private int[] components;
+    private final int[] tree;
 
-    void constructor(int N) {
+    public QuickUnion(int N) {
         // Initialize with N objects
-        this.components = new int[N];
+        this.tree = new int[N];
+
+        // Initial fill components with value=index
+        for (int i = 0; i < this.tree.length; i++)
+            this.tree[i] = i;
     }
 
-    void fillComponents() {
-        // Initial fill components with value=index
-        for (int i = 0; i < this.components.length; i++)
-            this.components[i] = i;
-    }
 
     /**
      * Return the root in tree for node i
@@ -20,9 +19,9 @@ public class QuickUnion {
      * @param i node to search root for
      * @return the root for node i
      */
-    private int getRoot(int i) {
+    private int find(int i) {
         // Go up through the tree until find the `reflexive node` = root
-        while (i != this.components[i]) i = this.components[i];
+        while (i != this.tree[i]) i = this.tree[i];
         return i;
 
     }
@@ -35,8 +34,8 @@ public class QuickUnion {
      * @param q index
      * @return boolean true if connected else false
      */
-    boolean isConnected(int p, int q) {
-        return getRoot(p) == getRoot(q);
+    public boolean connected(int p, int q) {
+        return find(p) == find(q);
     }
 
     /**
@@ -46,13 +45,13 @@ public class QuickUnion {
      * @param p index
      * @param q index
      */
-    void addUnion(int p, int q) {
+    public void union(int p, int q) {
         // root for index p
-        int pRoot = getRoot(p);
+        int pRoot = find(p);
         // root for index q
-        int qRoot = getRoot(q);
+        int qRoot = find(q);
 
         // Add p's root as parent for p component
-        this.components[pRoot] = qRoot;
+        this.tree[pRoot] = qRoot;
     }
 }
