@@ -23,10 +23,7 @@ public class Percolation {
         // Add an extra object to top and bottom eg: 5 x 5 + 2
         // Not Zer0-based indexes in operations params row, col
         unionFind = new WeightedQuickUnion(n * n + 2);
-        fillBoxes();
-    }
 
-    private void fillBoxes() {
         // Init Blocking all boxes
         for (int k = 0; k < this.N; k++) {
             for (int j = 0; j < this.N; j++) {
@@ -34,6 +31,7 @@ public class Percolation {
             }
         }
     }
+
 
     private void virtualTopUnion(int row, int col) {
         // Populate top virtual component tree
