@@ -1,6 +1,7 @@
 package DynamicConnection.example;
 import DynamicConnection.WeightedQuickUnion;
 
+// Full example https://gist.github.com/geolffreym/ca869b97a46ec924d91f0c188d74170d
 public class Percolation {
     private enum States {
         CLOSE,
