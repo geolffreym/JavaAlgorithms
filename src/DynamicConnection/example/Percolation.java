@@ -140,7 +140,7 @@ public class Percolation {
      *
      * @param row in 2D - Not zero-based index
      * @param col in 2D - Not zero-based index
-     * @return int expected 1D index from 2D array
+     * @return int projected 1D index from 2D array
      */
     private int find1DIndexFrom2D(int row, int col) {
 
